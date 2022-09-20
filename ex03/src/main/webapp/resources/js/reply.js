@@ -23,8 +23,49 @@ var replyService = (function(){
 			
 		})
 	}
+	// http://localhost:9094/replies/pages/7/1
+	// http://localhost:9094/replies/pages/7/1.json
+	function getList(param, callback, error){
+		
+		var bno = param.bno;
+		
+		var page= param.page||1;
+		
+		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
+			function(data){
+			if(callback){
+				callback(data);
+			}
+			
+		}).fail(function(xhr,status,err){
+			if(error){
+				error();
+			}
+			
+		});
+	}
+	
+	function remove(rno, callback, error){
+		$.ajax({
+			type : 'delete',
+			url : '/replies/' + rno,
+			success : function(deleteResult, status, xhr){
+				if(callback){
+					callback(deleteResult);
+				}
+			},
+			error : function(xhr, status, er){
+				if(error){
+					error(er);
+				}
+			}
+			
+		})
+	}
 	
 	return {
-		add:add
+		add:add,
+		getList : getList,
+		remove : remove
 		};
 })();
