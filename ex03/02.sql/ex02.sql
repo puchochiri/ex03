@@ -1,3 +1,9 @@
+CREATE USER book_ex IDENTIFIED by book_ex
+Default Tablespace users
+temporary tablespace temp;
+
+grant connect, dba to book_ex;
+
 create sequence seq_board;
 
 create table tbl_board(
@@ -52,5 +58,8 @@ alter table tbl_reply add constraint pk_reply primary key(rno);
 
 alter table tbl_reply add constraint fk_reply_board
 foreign key (bno) references tbl_board (bno);
+
+create index idx_reply on tbl_reply (bno desc, rno asc);
+
 
 
