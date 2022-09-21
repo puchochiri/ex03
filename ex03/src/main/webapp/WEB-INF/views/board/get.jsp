@@ -190,7 +190,7 @@ $(document).ready(function(){
 		var next = false;
 		
 		if(endNum * 10 >= replyCnt){
-			endNum = Math.ceil(replyCnt/10.0) * 10;
+			endNum = Math.ceil(replyCnt/10.0);
 		}
 		
 		if(endNum * 10 < replyCnt) {
